@@ -1,6 +1,6 @@
 -- create database jsweb;
 create table test(
-   user_id INT NOT NULL AUTO_INCREMENT,
+   user_id bigint NOT NULL AUTO_INCREMENT,
    user_name VARCHAR(100) NOT NULL,
    user_password VARCHAR(40) NOT NULL,
    PRIMARY KEY ( user_id )
