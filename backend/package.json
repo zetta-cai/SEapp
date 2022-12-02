@@ -1,0 +1,14 @@
+{
+    "scripts": {
+        "dev": "cross-env NODE_ENV=dev nodemon ./bin/www.js",
+        "prd": "cross-env NODE_ENV=production nodemon ./bin/www.js"
+    },
+    "dependencies": {
+        "cross-env": "^7.0.3",
+        "http": "^0.0.1-security",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.20",
+        "redis": "^3.1.2",
+        "xss": "^1.0.14"
+    }
+}
