@@ -1,0 +1,9 @@
+const http = require('http')
+const cors = require('cors')
+var app = require('../app')
+const PORT = 8000
+// const serverHandle = require('../app')
+app.set('port', PORT);
+const server = http.createServer(app)
+
+server.listen(PORT)
