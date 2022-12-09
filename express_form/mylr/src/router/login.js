@@ -37,9 +37,10 @@ router.post('/api/user/login', upload.array(), function (req, res, next) {
                     "code":20000,
                     "message":"成功",
                     "data": {
-                        
+                        user_id:loginData.user_id
                     }
                 }
+                console.log(ret)
                 res.send(ret)
                 // res.sendStatus(220);
                 return

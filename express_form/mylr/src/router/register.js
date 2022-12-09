@@ -1,4 +1,4 @@
-const { user_login, user_register } = require('../controller/user')
+const { user_login, user_register,user_info_register } = require('../controller/user')
 const { set_redis } = require('../db/redis')
 const { SuccessModel, ErrorModel } = require('../modules/Basemodule')
 const { genPassword } = require('../utils/cryp')
@@ -22,19 +22,23 @@ router.post('/api/user/register', upload.array(), function (req, res, next) {
         const result = user_register(user.user_id, user.username, genPassword(user.password))
         return result.then(registerData => {
             if (registerData) {
-                console.log('成功')
-                req.session.user_id = user_id
-                req.session.user_name = username
-                set_redis(req.sessionId, req.session)
+                user_info_register(user.user_id)
+                console.log('user_info成功')
+                // req.session.isFirst = 1;
+                // res.cookie('isFirst', 1, { maxAge: 60 * 1000, singed: true });
+                // set_redis(req.sessionId, req.session)
+                console.log(user.user_id)
                 var ret = {
                     "success": true,
-                    "code": 20000,
+                    "code": 20001,
                     "message": "成功",
                     "data": {
-
+                        user_id:user.user_id
                     }
                 }
+                console.log(ret)
                 res.send(ret)
+                return 
             } else {
                 res.sendStatus(404);
             }

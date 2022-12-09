@@ -43,11 +43,11 @@ const user_register = (user_id, username, password) => {
     return exec(addSql).then(rows => {
         console.log('注册成功');
         return 1
-    },(err)=>{
+    }, (err) => {
         if (err) {
-            console.log('[INSERT ERROR] - ', err.message) 
-            res.send('该用户已注册') 
-            return 
+            console.log('[INSERT ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
         }
     })
     // connection.query(addSql, addSqlParams, (err, result) => {
@@ -60,8 +60,43 @@ const user_register = (user_id, username, password) => {
     //     res.send('注册成功');
     // })
 }
+
+const user_info_register = (user_id) => {
+    user_id = escape(user_id)
+    const addSql = `INSERT INTO user_info(user_id) 
+            VALUES(${xss(user_id)});`
+    return exec(addSql).then(rows => {
+        console.log('user_info注册成功');
+        return 1
+    }, (err) => {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
+        }
+    })
+}
+const user_info_show = (user_id) => {
+    console.log(user_id)
+    user_id = escape(user_id)
+    const addSql = `select user.user_id, user_tel, user_real_name, user_addr ,user_email, user_gender,user.user_name
+    from user_info,user
+    where user.user_id = ${xss(user_id)} and user.user_id = ${xss(user_id)};`
+    return exec(addSql).then(rows => {
+        console.log('user_info_show success');
+        return (rows[0] || {})
+    }, (err) => {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
+        }
+    })
+}
 module.exports = {
     user_login,
     user_register,
+    user_info_register,
+    user_info_show,
     user_check
 }
