@@ -16,7 +16,22 @@ const campus_show = (user_id) => {
         }
     })
 }
-
+const campus_showmoney = (user_id) => {
+    user_id = escape(user_id)
+    const sql = `select remain_money 
+    from campus_card, user_card 
+    where account_num = card_num and user_id = ${xss(user_id)};`
+    return exec(sql).then(rows => {
+        console.log('campus_showmoney success');
+        return (rows[0] || {})
+    }, (err) => {
+        if (err) {
+            console.log('[select ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
+        }
+    })
+}
 const campus_change = (user_id, money) => {
     user_id = escape(user_id)
     money = escape(parseFloat(money))
@@ -98,5 +113,6 @@ const campus_change = (user_id, money) => {
 
 module.exports = {
     campus_show,
-    campus_change
+    campus_change,
+    campus_showmoney
 }

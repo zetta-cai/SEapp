@@ -4,9 +4,13 @@ var multer = require('multer');  //解析form的文本域与文件上传
 var upload = multer();
 var express = require('express');
 const { card_show, card_bound, card_show_money, card_check_user, card_check_card, update_money } = require("../controller/card");
+const { history_insert } = require("../controller/history");
 var router = express.Router();
+const jwt = require('jsonwebtoken');
 router.post('/show', upload.array(), function (req, res, next) {
-    var user = { uid: req.body.uid };
+    var decoded = jwt.decode(req.body.uid);
+    console.log(decoded);
+    var user = { uid: decoded.uid };
     var checked = req.body.checked;
     console.log(req.body)
     const result = card_show(user.uid)
@@ -34,7 +38,9 @@ router.post('/show', upload.array(), function (req, res, next) {
     })
 });
 router.post('/bound', upload.array(), function (req, res, next) {
-    var user = { uid: req.body.uid, card_num: req.body.card };
+    var decoded = jwt.decode(req.body.uid);
+    console.log(decoded);
+    var user = { uid: decoded.uid, card_num: req.body.card };
     if (user.uid == '' || user.card_num == '') {
         var ret = {
             message: "绑定失败",
@@ -58,7 +64,7 @@ router.post('/bound', upload.array(), function (req, res, next) {
                 "message": "成功",
                 "data": {
                     card_num: cardData,
-                    uid: user.uid
+                    // uid: user.uid
                 }
             }
             console.log(ret)
@@ -78,7 +84,9 @@ router.post('/bound', upload.array(), function (req, res, next) {
     })
 });
 router.post('/showmoney', upload.array(), function (req, res, next) {
-    var user = { uid: req.body.uid, card_num: req.body.card };
+    var decoded = jwt.decode(req.body.uid);
+    console.log(decoded);
+    var user = { uid: decoded.uid, card_num: req.body.card };
     if (user.uid == '' || user.card_num == '') {
         var ret = {
             message: "绑定失败",
@@ -102,7 +110,7 @@ router.post('/showmoney', upload.array(), function (req, res, next) {
                 "message": "成功",
                 "data": {
                     card_money: cardData.card_money,
-                    uid: user.uid
+                    // uid: user.uid
                 }
             }
             console.log(ret)
@@ -123,8 +131,10 @@ router.post('/showmoney', upload.array(), function (req, res, next) {
 });
 
 router.post('/changemoney', upload.array(), function (req, res, next) {
+    var decoded = jwt.decode(req.body.uid);
+    console.log(decoded);
     var user = {
-        uid: req.body.uid,
+        uid: decoded.uid,
         money: req.body.money,
         in_card: req.body.in_card,
         out_card: req.body.out_card
@@ -153,10 +163,13 @@ router.post('/changemoney', upload.array(), function (req, res, next) {
                     return update_out.then(outdata => {
                         console.log('out', outdata)
                         const update_in = update_money(user.in_card, user.money)
-                        if (outdata==1) {
+                        if (outdata == 1) {
                             return update_in.then(indata => {
                                 console.log('in', indata)
-                                if(indata==1){
+                                if (indata == 1) {
+                                    //记录历史
+                                    history_insert(user.uid, user.out_card, check_cardData.user_id,
+                                        user.in_card, user.money)
                                     var ret = {
                                         "success": true,
                                         "code": 20001,
@@ -167,12 +180,12 @@ router.post('/changemoney', upload.array(), function (req, res, next) {
                                     }
                                     console.log(ret)
                                     res.send(ret)
-                                    return 
+                                    return
                                 }
                                 else {
                                     update_money(user.out_card, user.money)
                                     res.sendStatus(404);
-                                    return 
+                                    return
                                 }
                             })
                         }

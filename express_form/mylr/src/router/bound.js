@@ -1,7 +1,9 @@
 const { user_check } = require("../controller/user");
 
 router.post('/api/card/bound', upload.array(), function (req, res, next) {
-    var card = { card_num: req.body.card_num, user_id: req.body.user_id, password: req.body.password };
+    var decoded = jwt.decode(req.body.uid);
+    console.log(decoded);
+    var card = { card_num: req.body.card_num, user_id: decoded.uid, password: req.body.password };
     var checked = req.body.checked;
     console.log(req.body)
     // if (user.username == '' || user.password == '') {

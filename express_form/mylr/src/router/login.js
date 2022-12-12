@@ -7,7 +7,9 @@ var multer = require('multer');  //解析form的文本域与文件上传
 var upload = multer();
 var express = require('express');
 var router = express.Router();
-
+const jwt = require('jsonwebtoken')//const定义的变量不可以修改，而且必须初始化
+// 密钥
+const secret = 'CJZTCL' // 这是加密的key（密钥或私钥） 
 router.post('/api/user/login', upload.array(), function (req, res, next) {
     // var hash = crypto.createHash("md5");
     // hash.update(req.body.password);
@@ -32,12 +34,18 @@ router.post('/api/user/login', upload.array(), function (req, res, next) {
                 req.session.isFirst = 1;
                 res.cookie('isFirst', 1, { maxAge: 60 * 1000, singed: true });
                 // res.send("欢迎第一次访问。");
-                var ret={
-                    "success":true,
-                    "code":20000,
-                    "message":"成功",
+                const payload = {
+                    uid: loginData.user_id
+                }
+                const token = jwt.sign(payload, secret, { expiresIn: 60 * 60 * 24 })//expiresIn设置为24小时过期
+                // 输出签发的 Token
+                console.log(token)
+                var ret = {
+                    "success": true,
+                    "code": 20000,
+                    "message": "成功",
                     "data": {
-                        user_id:loginData.user_id
+                        user_id: token
                     }
                 }
                 console.log(ret)

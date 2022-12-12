@@ -81,10 +81,102 @@ const user_info_show = (user_id) => {
     user_id = escape(user_id)
     const addSql = `select user.user_id, user_tel, user_real_name, user_addr ,user_email, user_gender,user.user_name
     from user_info,user
-    where user.user_id = ${xss(user_id)} and user.user_id = ${xss(user_id)};`
+    where user.user_id = ${xss(user_id)} and user_info.user_id = ${xss(user_id)};`
     return exec(addSql).then(rows => {
-        console.log('user_info_show success');
+        console.log('user_info_show success', (rows[0] || {}));
         return (rows[0] || {})
+    }, (err) => {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
+        }
+    })
+}
+const user_name_change = (user_id, user_real_name) => {
+    user_id = escape(user_id)
+    user_real_name = escape(user_real_name)
+    const addSql = `update user_info 
+    set user_real_name = ${xss(user_real_name)}
+    where user_id = ${xss(user_id)};`
+    console.log(addSql)
+    return exec(addSql).then(rows => {
+        console.log(rows.affectedRows);
+        return Promise.resolve(rows.affectedRows)
+    }, (err) => {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
+        }
+    })
+}
+
+const user_gender_change = (user_id, gender) => {
+    user_id = escape(user_id)
+    gender = escape(gender)
+    const addSql = `update user_info 
+    set user_gender = ${xss(gender)}
+    where user_id = ${xss(user_id)};`
+    console.log(addSql)
+    return exec(addSql).then(rows => {
+        console.log(rows.affectedRows);
+        return Promise.resolve(rows.affectedRows)
+    }, (err) => {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
+        }
+    })
+}
+
+const user_email_change = (user_id, email) => {
+    user_id = escape(user_id)
+    email = escape(email)
+    const addSql = `update user_info 
+    set user_email = ${xss(email)}
+    where user_id = ${xss(user_id)};`
+    console.log(addSql)
+    return exec(addSql).then(rows => {
+        console.log(rows.affectedRows);
+        return Promise.resolve(rows.affectedRows)
+    }, (err) => {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
+        }
+    })
+}
+const user_addr_change = (user_id, addr) => {
+    user_id = escape(user_id)
+    addr = escape(addr)
+    const addSql = `update user_info 
+    set user_addr = ${xss(addr)}
+    where user_id = ${xss(user_id)};`
+    console.log(addSql)
+    return exec(addSql).then(rows => {
+        console.log(rows.affectedRows);
+        return Promise.resolve(rows.affectedRows)
+    }, (err) => {
+        if (err) {
+            console.log('[INSERT ERROR] - ', err.message)
+            res.send('该用户已注册')
+            return
+        }
+    })
+}
+const user_tel_change = (user_id, tel) => {
+    user_id = escape(user_id)
+    tel = escape(tel)
+    const addSql = `update user_info 
+    set user_tel = ${xss(tel)}
+    where user_id = ${xss(user_id)};`
+    console.log(addSql)
+    return exec(addSql).then(rows => {
+        console.log(rows.affectedRows);
+        return Promise.resolve(rows.affectedRows)
     }, (err) => {
         if (err) {
             console.log('[INSERT ERROR] - ', err.message)
@@ -98,5 +190,10 @@ module.exports = {
     user_register,
     user_info_register,
     user_info_show,
+    user_name_change,
+    user_gender_change, 
+    user_email_change,
+    user_addr_change,
+    user_tel_change,
     user_check
 }

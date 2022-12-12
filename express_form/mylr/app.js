@@ -8,6 +8,8 @@ var userinfo = require('./src/router/userinfo');
 var card_op = require('./src/router/card_op');
 var money_op = require('./src/router/money_op.js');
 var campus = require('./src/router/campus_info')
+var phone = require('./src/router/phone')
+var history = require('./src/router/history')
 // var bound = require('./src/router/bound');
 var session = require('express-session');
 var cors = require('cors')
@@ -25,7 +27,9 @@ app.use('/', register);
 app.use('/api/user/info', userinfo);
 app.use('/api/card', card_op);
 app.use('/api/third/campus', campus);
+app.use('/api/third/phone', phone);
 app.use('/api/money', money_op);
+app.use('/api/history', history);
 // app.use('/api/card/bound', bound);
 module.exports = app
 

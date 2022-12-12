@@ -1,8 +1,8 @@
 const { exec, escape } = require('../db/mysql')
 const xss = require('xss')
-const card_show_money  = (user_id, card_num)=> {
+const card_show_money = (user_id, card_num) => {
     user_id = escape(user_id)
-    card_num= escape(card_num)
+    card_num = escape(card_num)
     const sql = `select card_money from user_card 
     where card_num = ${xss(card_num)}and user_id= ${xss(user_id)};`
     return exec(sql).then(rows => {
@@ -15,7 +15,7 @@ const card_show_money  = (user_id, card_num)=> {
         }
     })
 }
-const card_show= (user_id) => {
+const card_show = (user_id) => {
     user_id = escape(user_id)
     const sql = `select card_num 
     from user_card where user_id = ${xss(user_id)};`
@@ -60,10 +60,10 @@ const card_bound = (user_id, card_num) => {
 
 const card_check_card = (in_card) => {
     in_card = escape(in_card)
-    const sql = `select count(card_num) as card_check_succ from user_card where card_num = ${xss(in_card)};`
+    const sql = `select user_id,count(card_num) as card_check_succ from user_card where card_num = ${xss(in_card)};`
     return exec(sql).then(rows => {
-        console.log('card_check_user',rows)
-        return (rows[0]|| {})
+        console.log('card_check_user', rows)
+        return (rows[0] || {})
     }, (err) => {
         if (err) {
             console.log('[card_check_card ERROR] - ', err.message)
@@ -71,7 +71,7 @@ const card_check_card = (in_card) => {
         }
     })
 }
-const card_check_user= (uid, money,out_card) => {
+const card_check_user = (uid, money, out_card) => {
     uid = escape(uid)
     money = escape(money)
     out_card = escape(out_card)
@@ -79,7 +79,7 @@ const card_check_user= (uid, money,out_card) => {
     from user_card 
     where card_num = ${xss(out_card)} and card_money >= ${xss(money)} and user_id = ${xss(uid)};`
     return exec(sql).then(rows => {
-        console.log('card_check_user',rows)
+        console.log('card_check_user', rows)
         return (rows[0] || {})
     }, (err) => {
         if (err) {
@@ -88,14 +88,16 @@ const card_check_user= (uid, money,out_card) => {
         }
     })
 }
-const update_money= (card_num, money) => {
+const update_money = (card_num, money) => {
     card_num = escape(card_num)
-    money = escape(money)
+    money = escape(parseFloat(money))
     const sql = `update user_card 
-    set card_money = card_money + ${xss(money)} where card_num =  ${xss(card_num)} ;`
+    set card_money = card_money + ${xss(money)} 
+    where card_num =  ${xss(card_num)} and card_money + ${xss(money)} >=0;`
+    // console.log('sql',sql)
     return exec(sql).then(rows => {
-        console.log('update_money',rows.affectedRows)
-        return Promise.resolve (rows.affectedRows)
+        console.log('update_money', rows.affectedRows)
+        return Promise.resolve(rows.affectedRows)
     }, (err) => {
         if (err) {
             console.log('[update_money ERROR] - ', err.message)
