@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css'>
+  <link rel="stylesheet" href="./public/css/third_service.css">
+  <title>第三方服务</title>
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+  <script>
+    $(function () {
+      getData1()
+    });
+    function getData1() {
+      var searchUrl = window.location.href;
+      var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+      var searchText = decodeURI(searchData[1]); //decodeURI解码
+      //alert(searchText)
+    }
+  </script>
+</head>
+
+<body>
+
+  <div id="name"></div>
+  <!-- 卡片设计 -->
+  <div class="blog-slider">
+    <div class="blog-slider_wrp swiper-wrapper">
+
+      <div class="blog-slider_item swiper-slide">
+        <div class="blog-slider_img">
+          <img src="./pic/pic1.jpg" alt="">
+        </div>
+        <div class="blog-slider_content">
+          <span class="blog-slider_code">No.1</span>
+          <div class="blog-slider_title">校园卡服务</div>
+          <div class="blog-slider_text">网上充值时间为0:00-21:30,网上充值单笔金额不能超过500元。</div>
+          <button class="blog-slider_button" id="school_card_login">中国矿业大学入口</button>
+        </div>
+      </div>
+      <script>
+        document.getElementById("school_card_login").addEventListener('click',function(){
+          var searchUrl = window.location.href;
+          var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+          var searchText = decodeURI(searchData[1]); //decodeURI解码
+          //alert(searchText)
+          url="school_card.html?uid=" + searchText;
+          self.location.href = url;
+        })
+      </script>
+
+      <div class="blog-slider_item swiper-slide">
+        <div class="blog-slider_img">
+          <img src="./pic/pic2.jpg" alt="">
+        </div>
+        <div class="blog-slider_content">
+          <span class="blog-slider_code">No.2</span>
+          <div class="blog-slider_title">话费充值服务</div>
+          <div class="blog-slider_text">本服务为代充服务,不提供运营商发票。若充值到账稍有延迟,请耐心等候。</div>
+          <button class="blog-slider_button" id="phone_recharge"" class="blog-slider_button">充值入口</a>
+        </div>
+      </div>
+      <script>
+        document.getElementById("phone_recharge").addEventListener('click',function(){
+          var searchUrl = window.location.href;
+          var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+          var searchText = decodeURI(searchData[1]); //decodeURI解码
+          //alert(searchText)
+          url="prepaid_recharge.html?uid=" + searchText;
+          self.location.href = url;
+        })
+      </script>
+
+    </div>
+    <div class="blog-slider_pagination"></div>
+  </div>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.js'></script>
+  <script src="./public/css/third_service.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>存款</title>
+  <link rel="stylesheet" href="./public/css/transfer.css">
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+</head>
+<style>
+  a {
+    color: burlywood;
+    text-decoration: none;
+  }
+</style>
+<style>
+  .demo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 1000px;
+    z-index: -10;
+    zoom: 1;
+    background-color: #fff;
+    background: url(./pic/pic9.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+  }
+</style>
+<style>
+  #button1 {
+    position: absolute;
+    left: 480px;
+    top: 80px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 20px;
+    writing-mode: initial;
+  }
+</style>
+<style>
+  #button2 {
+    position: absolute;
+    left: 745px;
+    top: 80px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 20px;
+  }
+</style>
+<style>
+  #button3 {
+    position: absolute;
+    left: 550px;
+    top: 340px;
+    border-radius: 30px;
+    border: 2px solid;
+    outline: none;
+    font-size: 25px;
+  }
+
+  #button4 {
+    position: absolute;
+    left: 700px;
+    top: 340px;
+    border-radius: 30px;
+    border: 2px solid;
+    outline: none;
+    font-size: 25px;
+  }
+
+  #button5 {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 25px;
+    color: rgb(241, 194, 137);
+  }
+</style>
+<style>
+  #h2-1 {
+    position: absolute;
+    left: 330px;
+    top: 70px;
+  }
+</style>
+<style>
+  #h2-2 {
+    position: absolute;
+    left: 330px;
+    top: 145px;
+  }
+</style>
+<style>
+  #h2-3 {
+    position: absolute;
+    left: 330px;
+    top: 230px;
+  }
+
+  #h2-4 {
+    position: absolute;
+    left: 1000px;
+    top: 60px;
+  }
+
+  #h2-5 {
+    position: absolute;
+    left: 1000px;
+    top: 90px;
+  }
+</style>
+<style>
+  #text0 {
+    position: absolute;
+    left: 480px;
+    top: 85px;
+    background-color: rgba(255, 255, 255, 0);
+    width: 475px;
+    height: 52px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 25px;
+  }
+
+  #text1 {
+    position: absolute;
+    left: 480px;
+    top: 160px;
+    background-color: rgba(255, 255, 255, 0);
+    width: 475px;
+    height: 52px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 25px;
+  }
+
+  #text2 {
+    position: absolute;
+    left: 480px;
+    top: 240px;
+    background-color: rgba(255, 255, 255, 0);
+    width: 475px;
+    height: 52px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 25px;
+  }
+</style>
+</style>
+
+<body>
+  <div class="demo"></div>
+  <div id="body">
+    <h2 id="h2-1">存款卡号</h2>
+    <input type="text" name="idcard" id="text0">
+    <h2 id="h2-2">存入金额:</h2>
+    <input type="text" name="amount" id="text1">
+    <h2 id="h2-3">定期存款年限:</h2>
+    <input type="text" name="amount" id="text2">
+    <button class="btn" id="button3">活期存储</button>
+    <button class="btn" id="button4">定期存储</button>
+    <!-- <button class="btn" id="button5">利率显示</button> -->
+    <textarea style="margin-left:980px;margin-top:100px" rows="5" cols="18" id="text3">
+      活期:0.25%
+      定期一年:1.65%
+      定期二年:2.15%
+      定期三年:2.60%
+    </textarea>
+  </div>
+  <!-- <script>
+      $(function () {
+        $('#button5').on('click', function () {
+          const fsLibrary = require('fs')
+          fsLibrary.readFile('./rate.txt', (error, data) => {
+          var array_txt = data.toString().split(' ')
+          var str0 = array_txt[0] + array_txt[1] + array_txt[2] + array_txt[3]
+          })
+          alert(str0)
+          $('#text3').text(str0)
+      })
+    })
+  </script> -->
+  <script>
+    function IsAllNumber(str) { return /^\d+$/.test(str) } //只能有数字
+    const loginE1 = document.getElementById("text0");
+    loginE1.addEventListener("input", () => {
+      if (IsAllNumber(loginE1.value) == false) loginE1.value = ''
+    })
+  </script>
+  <script>
+    $(function () {
+      $('#button3').on('click', function () {
+        var searchUrl = window.location.href;
+        var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+        var searchText = decodeURI(searchData[1]); //decodeURI解码
+        var cardid = document.getElementById("text0").value;
+        var mon = document.getElementById("text1").value;
+        var year = 0;
+        mon = parseFloat(mon)
+        var len1 = cardid.length;
+        if (len1 == 19) {
+          $.ajax({
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded',
+            url: 'http://123.249.85.85:8000/api/money/deposit',
+            data: ({
+              uid: searchText,
+              money: mon,
+              card_num: cardid,
+              interval: year,
+              rate: 0.01
+            }),
+            success: function (res) {
+              alert("活期存款成功！")
+            },
+            error: function (res) {
+              alert("余额不足,活期存款失败！")
+            }
+          })
+        }
+        else {
+          alert('银行卡位数不正确')
+        }
+      })
+    })
+  </script>
+  <script>
+    $(function () {
+      $('#button4').on('click', function () {
+        var searchUrl = window.location.href;
+        var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+        var searchText = decodeURI(searchData[1]); //decodeURI解码
+        var cardid = document.getElementById("text0").value;
+        var mon = document.getElementById("text1").value;
+        var year = document.getElementById("text2").value;
+        mon = parseFloat(mon)
+        var len1 = cardid.length;
+        if (len1 == 19) {
+          $.ajax({
+            type: 'POST',
+            contentType: 'application/x-www-form-urlencoded',
+            url: 'http://123.249.85.85:8000/api/money/deposit',
+            data: ({
+              uid: searchText,
+              money: mon,
+              card_num: cardid,
+              interval: year,
+              rate: 0.03
+            }),
+            success: function (res) {
+              alert("定期存款成功！")
+            },
+            error: function (res) {
+              alert("余额不足,定期存款失败！")
+            }
+          })
+        }
+        else {
+          alert('银行卡位数不正确')
+        }
+      })
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css'><link rel="stylesheet" href="./public/css/third_service.css">
+    <title>话费充值</title>
+</head>
+<body>
+<!-- 卡片设计 -->
+<div class="blog-slider">
+    <div class="blog-slider_wrp swiper-wrapper">
+
+        <div class="blog-slider_item swiper-slide">
+            <div class="blog-slider_img">
+                <img src="./pic/pic2.jpg" alt="">
+            </div>
+            <div class="blog-slider_content">
+                <span class="blog-slider_code">话费充值</span>
+                <div class="blog-slider_title">号码 <input type="text" value="" class="blog-slider_text" id="text0"/> </div>  
+                <div class="blog-slider_title">扣费卡号 <input type="text" value="" class="blog-slider_text" id="text1"/> </div>  
+                <button class="btn" id="id1">30元</button>
+                <button class="btn" id="id2">50元</button>
+                <button class="btn" id="id3">100元</button>
+                <button class="btn" id="id4">300元</button>
+                <button class="btn" id="id5">500元</button>
+            </div>
+        </div>
+        <script>
+            document.getElementById("id1").addEventListener('click', function () {
+                var searchUrl = window.location.href;
+                var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+                var searchText = decodeURI(searchData[1]); //decodeURI解码
+                var bankcard0=document.getElementById("text1").value;
+                // alert(bankcard0)
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded',
+                    url: 'http://123.249.85.85:8000/api/third/phone',
+                    data: ({
+                        card_num:bankcard0,
+                        money:30
+                    }),
+                    success: function (res) {
+                        alert("充值成功！")
+                    },
+                    error: function (res) {
+                        alert("余额不足，充值失败！")
+                    }
+                })
+            })
+        </script>
+        <script>
+            document.getElementById("id2").addEventListener('click', function () {
+                var searchUrl = window.location.href;
+                var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+                var searchText = decodeURI(searchData[1]); //decodeURI解码
+                var bankcard0=document.getElementById("text1").value;
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded',
+                    url: 'http://123.249.85.85:8000/api/third/phone',
+                    data: ({
+                        card_num:bankcard0,
+                        money:50
+                    }),
+                    success: function (res) {
+                        alert("充值成功！")
+                    },
+                    error: function (res) {
+                        alert("余额不足，充值失败！")
+                    }
+                })
+            })
+        </script>
+        <script>
+            document.getElementById("id3").addEventListener('click', function () {
+                var searchUrl = window.location.href;
+                var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+                var searchText = decodeURI(searchData[1]); //decodeURI解码
+                var bankcard0=document.getElementById("text1").value;
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded',
+                    url: 'http://123.249.85.85:8000/api/third/phone',
+                    data: ({
+                        uid: searchText,
+                        card_num:bankcard0,
+                        money:100
+                    }),
+                    success: function (res) {
+                        alert("充值成功！")
+                    },
+                    error: function (res) {
+                        alert("余额不足，充值失败！")
+                    }
+                })
+            })
+        </script>
+        <script>
+            document.getElementById("id4").addEventListener('click', function () {
+                var searchUrl = window.location.href;
+                var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+                var searchText = decodeURI(searchData[1]); //decodeURI解码
+                var bankcard0=document.getElementById("text1").value;
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded',
+                    url: 'http://123.249.85.85:8000/api/third/phone',
+                    data: ({
+                        uid: searchText,
+                        card_num:bankcard0,
+                        money:300
+                    }),
+                    success: function (res) {
+                        alert("充值成功！")
+                    },
+                    error: function (res) {
+                        alert("余额不足，充值失败！")
+                    }
+                })
+            })
+        </script>
+        <script>
+            document.getElementById("id5").addEventListener('click', function () {
+                var searchUrl = window.location.href;
+                var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+                var searchText = decodeURI(searchData[1]); //decodeURI解码
+                var bankcard0=document.getElementById("text1").value;
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded',
+                    url: 'http://123.249.85.85:8000/api/third/phone',
+                    data: ({
+                        uid: searchText,
+                        card_num:bankcard0,
+                        money:500
+                    }),
+                    success: function (res) {
+                        alert("充值成功！")
+                    },
+                    error: function (res) {
+                        alert("余额不足，充值失败！")
+                    }
+                })
+            })
+        </script>
+    </div>
+    <div class="blog-slider_pagination"></div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.js'></script><script src="./public/css/third_service.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>取款</title>
+  <link rel="stylesheet" href="./public/css/transfer.css">
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+</head>
+    <style>
+    a{
+    color:burlywood;
+    text-decoration:none;
+    }
+    </style>
+    <style>
+    .demo{
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    min-width: 1000px;
+    z-index:-10;
+    zoom: 1;
+    background-color: #fff;
+    background: url(./pic/pic9.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+         }
+    </style>
+    <style>
+    #button0 {
+    position: absolute;
+    left:-50px;
+    top:280px;
+    border-radius: 30px;
+    border: 2px solid;
+    outline: none;
+    font-size: 20px;
+    writing-mode:initial;
+    }
+    #button1 {
+    position: absolute;
+    left:470px;
+    top:80px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 20px;
+    writing-mode:initial;
+    }
+    </style>
+    <style>
+    #button2{
+    position: absolute;
+    left:710px;
+    top:80px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 20px;
+    }
+    </style>
+    <style>
+    #button3{
+    position: absolute;
+    left:620px;
+    top:240px;
+    border-radius: 30px;
+    border: 2px solid;
+    outline: none;
+    font-size: 20px;
+    }
+    #button4{
+    position: absolute;
+    right:10px;
+    top:10px;
+    font-size: 25px;
+    color: rgb(241, 194, 137);
+    }
+    #button5{
+    position: absolute;
+    left:10px;
+    top:10px;
+    font-size: 25px;
+    color: rgb(241, 194, 137);
+    }
+    </style>
+    <style>
+    #h2-1{
+    position: absolute;
+    left:340px;
+    top:70px;
+    }
+    </style>
+    <style>
+    #h2-2{
+    position: absolute;
+    left:340px;
+    top:145px;
+    }
+    </style>
+    <style>
+    #text0{
+    position: absolute;
+    left:470px;
+    top:80px;
+    background-color: rgba(255, 255, 255, 0);
+    width:475px;
+    height:52px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 25px;
+    }
+    #text1{
+    position: absolute;
+    left:470px;
+    top:160px;
+    background-color: rgba(255, 255, 255, 0);
+    width:475px;
+    height:52px;
+    border-radius: 30px;
+    border: 1px solid;
+    outline: none;
+    font-size: 25px;
+    }
+    </style>
+    <div class="demo">
+        <h2 id="h2-1">取款单号</h2>
+        <input type="text" name="amount" id="text0">
+        <h2 id="h2-2">取出卡号:</h2>
+        <input type="text" name="amount" id="text1">
+        <button class="btn" id="button3" >确认</button>
+        <tr>
+          <button style="margin-left:630px;margin-top:18px" class="btn" id="button0">存款单号显示</button>
+          <textarea style="margin-left:500px;margin-top:340px" rows="20" cols="30" id="text3"></textarea>
+        </tr>
+    </div>
+    <script>document.getElementById("text3").style.fontSize="20px"</script>
+    <script>
+      function IsAllNumber(str) { return /^\d+$/.test(str) } //只能有数字
+      const loginE1 = document.getElementById("text1");
+      loginE1.addEventListener("input", () => {
+        if (IsAllNumber(loginE1.value) == false) loginE1.value = '' 
+      })
+    </script>
+    <script>
+      $(function () {
+        $('#button3').on('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            var listid = document.getElementById("text0").value;
+            var cardid = document.getElementById("text1").value;
+            var len1 = cardid.length;
+            if(len1==19){
+              $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                url: 'http://123.249.85.85:8000/api/money/withdraw',
+                data: ({
+                    uid: searchText,
+                    card_num:cardid,
+                    saving_num:listid
+                }),
+                success: function (res) {
+                  alert("取款成功！")
+                },
+                error: function (res) {
+                  alert("取款失败！")
+                }
+              })
+            }
+            else{
+              alert('银行卡位数不正确')
+            }
+        })
+      })
+    </script>
+    <script>
+      $(function () {
+        $('#button0').on('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                url: 'http://123.249.85.85:8000/api/money/show',
+                data: ({
+                    uid: searchText,
+                }),
+                success: function (res) {
+                  var str=res.data.str1
+                    $('#text3').text(str)
+                },
+                error: function (res) {
+                  alert("查询失败！")
+                }
+            })
+        })
+      })
+    </script>
+</html>
+     

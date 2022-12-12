@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css'>
+    <link rel="stylesheet" href="./public/css/third_service.css">
+    <title>校园卡充值</title>
+</head>
+
+<body>
+    <!-- 卡片设计 -->
+    <div class="blog-slider">
+        <div class="blog-slider_wrp swiper-wrapper">
+
+            <div class="blog-slider_item swiper-slide">
+                <div class="blog-slider_img">
+                    <img src="./pic/pic1.jpg" alt="">
+                </div>
+                <div class="blog-slider_content">
+                    <div class="blog-slider_title">校园卡号 <input type="text" id="ta" required /></div>
+                    <div class="blog-slider_title">银行账户 <input type="text" id="tb" required /></div>
+                    <div class="blog-slider_title">充值金额 <input type="text" id="tc" required /></div>
+                    <button class="btn" id="school_card_login">校园卡充值</button>
+                    <button class="btn" id="school_card_changes">校园卡余额</button>
+                    <button class="btn" id="school_card_show">校园卡显示</button>
+                </div>
+            </div>
+        </div>
+        <div class="blog-slider_pagination"></div>
+    </div>
+
+    <script>
+        document.getElementById("school_card_show").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            //alert(searchText)
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                url: 'http://123.249.85.85:8000/api/third/campus/show',
+                data: ({
+                    uid: searchText,
+                }),
+                success: function (res) {
+                    var student_num = res.data.student_num;
+                    var account_num = res.data.account_num;
+                    document.getElementById("ta").setAttribute('value', student_num);
+                    document.getElementById("tb").setAttribute('value', account_num);
+                },
+                error: function (res) {
+                    alert("获取个人信息失败！")
+                }
+            })
+        })
+    </script>
+    <script>
+        document.getElementById("school_card_changes").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                url: 'http://123.249.85.85:8000/api/third/campus/showmoney',
+                data: ({
+                    uid: searchText,
+                }),
+                success: function (res) {
+                    alert(res.data.money)
+                },
+                error: function (res) {
+                    alert("余额查询失败！")
+                }
+            })
+        })
+    </script>
+
+    <script>
+        document.getElementById("school_card_login").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            var mon = document.getElementById("tc").value;
+            mon = parseFloat(mon)
+            alert(mon)
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                url: 'http://123.249.85.85:8000/api/third/campus/change',
+                data: ({
+                    uid: searchText,
+                    money: mon
+                }),
+                success: function (res) {
+                    alert("success!")
+                },
+                error: function (res) {
+                    alert("error!")
+                }
+            })
+        })
+    </script>
+
+
+
+    <!-- partial -->
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.js'></script>
+    <script src="./public/css/third_service.js"></script>
+</body>
+
+</html>

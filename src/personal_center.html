@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>个人中心</title>
+  <link rel="stylesheet" href="./public/css/personal_center.css">
+  <script src="./node_modules/jquery/dist/jquery.js"></script>
+</head>
+
+<body>
+  <section class="container">
+    <div class="heading">
+      <img class="heading_img" src="./pic/pic5.jpg">
+      <h1 class="heading_title">个人中心</h1>
+    </div>
+    <form class="form">
+      <div>
+        <button class="button" id="show"><span>信息显示</span></button>
+        <label style="margin-left:-25px" class="form_label">姓名
+          <input class="form_input" type="text" id="realname" size="30" required>
+          <button class="button" id="user_name"><span>提交修改</span></button>
+        </label>
+        <label style="margin-left:-25px" class="form_label">性别
+          <input class="form_input" type="text" id="Gender" size="30" required>
+          <button class="button" id="gender"><span>提交修改</span></button>
+        </label>
+        <label style="margin-left:-60px" class="form_label">证件号码
+          <input class="form_input" type="text" id="cardID" size="20" required>
+        </label>
+        <label style="margin-left:-70px" class="form_label">用户名
+          <input class="form_input" type="text" id="name" size="35" required>
+        </label>
+        <label style="margin-left:-25px" class="form_label">邮箱
+          <input class="form_input" type="text" id="Email" size="35" required>
+          <button class="button" id="email"><span>提交修改</span></button>
+        </label>
+        <label style="margin-left:5px" class="form_label">详细地址
+          <input class="form_input" type="text" id="Address" size="35" required>
+          <button class="button" id="address"><span>提交修改</span></button>
+        </label>
+        <label style="margin-left:5px" class="form_label">手机号码
+          <input class="form_input" type="text" id="Phone" size="35" required>
+          <button class="button" id="phone"><span>提交修改</span></button>
+        </label>
+
+        <script>
+          document.getElementById("show").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            $.ajax({
+              type: 'POST',
+              contentType: 'application/x-www-form-urlencoded',
+              url: 'http://123.249.85.85:8000/api/user/info/show',
+              data: ({
+                uid: searchText,
+              }),
+              success: function (res) {
+                var user_real_name = res.data.user_real_name
+                var user_gender = res.data.user_gender
+                var user_id = res.data.user_id
+                var user_name = res.data.user_name
+                var user_email = res.data.user_email
+                var user_addr = res.data.user_addr
+                var user_tel = res.data.user_tel
+                var uid= res.data.uid
+                document.getElementById("realname").setAttribute('value', user_real_name);
+                document.getElementById("Gender").setAttribute('value', user_gender);
+                document.getElementById("cardID").setAttribute('value', user_id);
+                document.getElementById("name").setAttribute('value', user_name);
+                document.getElementById("Email").setAttribute('value', user_email);
+                document.getElementById("Address").setAttribute('value', user_addr);
+                document.getElementById("Phone").setAttribute('value', user_tel);
+                // url = "home.html?uid=" + res.data.uid;//此处拼接内容
+                // self.location.href = url;
+              },
+              error: function (res) {
+                alert("获取个人信息失败！")
+              }
+            })
+          })
+        </script>
+        <script>
+          document.getElementById("user_name").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            var name = document.getElementById("realname").value;
+            $.ajax({
+              type: 'POST',
+              contentType: 'application/x-www-form-urlencoded',
+              url: 'http://123.249.85.85:8000/api/user/info/name',
+              data: ({
+                uid: searchText,
+                user_real_name: name
+
+              }),
+              success: function (res) {
+                alert("姓名修改成功！")
+              },
+              error: function (res) {
+                alert("姓名修改失败！")
+              }
+            })
+          })
+        </script>
+        <script>
+          document.getElementById("gender").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            var gender = document.getElementById("Gender").value;
+            $.ajax({
+              type: 'POST',
+              contentType: 'application/x-www-form-urlencoded',
+              url: 'http://123.249.85.85:8000/api/user/info/gender',
+              data: ({
+                uid: searchText,
+                gender: gender
+              }),
+              success: function (res) {
+                alert("性别修改成功！")
+              },
+              error: function (res) {
+                alert("性别修改失败！")
+              }
+            })
+          })
+        </script>
+        <script>
+          document.getElementById("email").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            var email = document.getElementById("Email").value;
+            $.ajax({
+              type: 'POST',
+              contentType: 'application/x-www-form-urlencoded',
+              url: 'http://123.249.85.85:8000/api/user/info/email',
+              data: ({
+                uid: searchText,
+                email: email
+              }),
+              success: function (res) {
+                alert("邮箱修改成功！")
+              },
+              error: function (res) {
+                alert("邮箱修改失败！")
+              }
+            })
+          })
+        </script>
+        <script>
+          document.getElementById("address").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            var address = document.getElementById("Address").value;
+            $.ajax({
+              type: 'POST',
+              contentType: 'application/x-www-form-urlencoded',
+              url: 'http://123.249.85.85:8000/api/user/info/addr',
+              data: ({
+                uid: searchText,
+                addr: address
+              }),
+              success: function (res) {
+                alert("地址修改成功！")
+              },
+              error: function (res) {
+                alert("地址修改失败！")
+              }
+            })
+          })
+        </script>
+        <script>
+          document.getElementById("phone").addEventListener('click', function () {
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            var phone = document.getElementById("Phone").value;
+            var len1 = phone.length;
+            if (len1 == 11) {
+              $.ajax({
+                type: 'POST',
+                contentType: 'application/x-www-form-urlencoded',
+                url: 'http://123.249.85.85:8000/api/user/info/tel',
+                data: ({
+                  uid: searchText,
+                  tel: phone
+                }),
+                success: function (res) {
+                  alert("手机号修改成功！")
+                },
+                error: function (res) {
+                  alert("手机号修改失败！")
+                }
+              })
+            }
+            else {
+              alert('手机号位数不正确！')
+            }
+          })
+        </script>
+        <script>
+          function IsAllNumber(str) { return /^\d+$/.test(str) } //只能有数字
+          const loginE1 = document.getElementById("Phone");
+          loginE1.addEventListener("input", () => {
+            if (IsAllNumber(loginE1.value) == false) loginE1.value = '' 
+          })
+        </script>
+      </div>
+    </form>
+    <div>
+      <ul class="toDoList"></ul>
+    </div>
+  </section>
+
+  <!-- partial -->
+  <script src="./public/css/personal_center.js"></script>
+</body>
+
+</html>

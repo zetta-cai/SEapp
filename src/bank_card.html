@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.css'><link rel="stylesheet" href="./public/css/bank_card.css">
+    <title>银行卡页面</title>
+</head>
+<body>
+<!-- 卡片设计 -->
+<div class="blog-slider">
+    <div class="blog-slider_wrp swiper-wrapper">
+
+        <div class="blog-slider_item swiper-slide">
+            <div class="blog-slider_img">
+                <img src="./pic/pic6.jpg" alt="">
+            </div>
+            <div class="blog-slider_content">
+                <span class="blog-slider_code">NO.1</span>
+                <div class="blog-slider_title">银行卡绑定</div>
+                <div class="blog-slider_text">银行完成对用户的认证，建立起用户-手机-银行顺畅的信任关系。</div>
+                <button class="blog-slider_button" id="login1">中国矿业大学入口</button>
+            </div>
+        </div>
+
+        <script>
+          document.getElementById("login1").addEventListener('click',function(){
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            //alert(searchText)
+            url="bank_card_binding.html?uid=" + searchText;
+            self.location.href = url;
+          })
+        </script>
+
+        <div class="blog-slider_item swiper-slide">
+          <div class="blog-slider_img">
+            <img src="./pic/pic7.jpg" alt="">
+          </div>
+          <div class="blog-slider_content">
+            <span class="blog-slider_code">NO.2</span>
+            <div class="blog-slider_title">余额查询</div>
+            <div class="blog-slider_text">轻松快捷查询银行卡余额</div>
+            <button class="blog-slider_button" id="login2">入口</button>
+          </div>
+        </div>
+
+        <script>
+          document.getElementById("login2").addEventListener('click',function(){
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            //alert(searchText)
+            url="bank_card_query.html?uid=" + searchText;
+            self.location.href = url;
+          })
+        </script>
+
+        <div class="blog-slider_item swiper-slide">
+            <div class="blog-slider_img">
+              <img src="./pic/pic8.jpg" alt="">
+            </div>
+            <div class="blog-slider_content">
+              <span class="blog-slider_code">NO.3</span>
+              <div class="blog-slider_title">交易明细</div>
+              <div class="blog-slider_text">一键查询所有交易记录</div>
+              <button class="blog-slider_button" id="login3">入口</button>
+            </div>
+        </div>
+        <script>
+          document.getElementById("login3").addEventListener('click',function(){
+            var searchUrl = window.location.href;
+            var searchData = searchUrl.split("="); //截取 url中的“=”,获得“=”后面的参数
+            var searchText = decodeURI(searchData[1]); //decodeURI解码
+            url="transaction.html?uid=" + searchText;
+            self.location.href = url;
+          })
+        </script>
+    </div>
+    <div class="blog-slider_pagination"></div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.15/swiper-bundle.min.js'></script><script src="./public/css/bank_card.js"></script>
+</body>
+</html>

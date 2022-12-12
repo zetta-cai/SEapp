@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册登录界面Ⅰ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="./public/css/login_register.css">
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
+</head>
+
+<body>
+    <div class="container right-panel-active">
+        <!-- 注册 -->
+        <div class="container_form container--signup">
+            <form action="#" class="form" id="form1">
+                <h2 class="form_title">注册</h2>
+                <input type="text" placeholder="User,仅可输入字母、数字、下划线" class="input" id="register_user" />
+                <input type="number" placeholder="ID,18位数字" class="input" id="register_ID" />
+                <input type="password" placeholder="Password" class="input" id="register_password" />
+                <button class="btn" id="register">注册</button>
+            </form>
+        </div>
+        <script>
+            $(function () {
+                $('#register').on('click', function () {
+                    var register_username = $("#register_user").val();
+                    var register_ID = $("#register_ID").val();
+                    var register_password = $("#register_password").val();
+                    var len1 = register_ID.length;
+                    if (len1==18) {
+                        $.ajax({
+                            type: 'POST',
+                            contentType: 'application/x-www-form-urlencoded',
+                            url: 'http://127.0.0.1:8000/api/user/register',
+                            data: ({
+                                username: register_username,
+                                user_id: register_ID,
+                                password: register_password
+                            }),
+                            success: function (res) {
+                                alert("注册成功！")
+                            },
+                            error: function (res) {
+                                console.log(res),
+                                    alert("此ID号已存在!")
+                            }
+                        })
+                    }
+                    else{
+                        alert('请输入18位身份证号')
+                    }
+                })
+            })
+        </script>
+        <!-- 登录 -->
+        <div class="container_form container--signin">
+            <form action="#" class="form" id="form2">
+                <h2 class="form_title">登录</h2>
+                <input type="text" placeholder="User,仅可输入字母、数字、下划线" class="input" id="login_user" />
+                <input type="password" placeholder="Password" class="input" id="login_password" />
+                <a href="#" class="link">Forgot your password?</a>
+                <button class="btn" id="login">登录</button>
+            </form>
+        </div>
+        <script>
+            $(function () {
+                $('#login').on('click', function () {
+                    var login_username = $("#login_user").val();
+                    var login_password = $("#login_password").val();
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/x-www-form-urlencoded',
+                        url: 'http://123.249.85.85:8000/api/user/login',
+                        data: ({
+                            username: login_username,
+                            password: login_password
+                        }),
+                        success: function (res) {
+                            url = "home.html?uid=" + res.data.user_id;//此处拼接内容
+                            self.location.href = url;
+                            alert("登录成功！")
+                        },
+                        error: function (res) {
+                            alert("登录失败！")
+                        }
+                    })
+                })
+            })
+        </script>
+
+        <!-- 浮层 -->
+        <div class="container_overlay">
+            <div class="overlay">
+                <div class="overlay_panel overlay--left">
+                    <button class="btn" id="signIn">登录</button>
+                </div>
+                <div class="overlay_panel overlay--right">
+                    <button class="btn" id="signUp">注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 背景 -->
+    <div class="slidershow">
+        <div class="slidershow--image" style="background-image: url('https://source.unsplash.com/Snqdjm71Y5s')"></div>
+        <div class="slidershow--image" style="background-image: url('https://source.unsplash.com/5APj-fzKE-k')"></div>
+        <div class="slidershow--image" style="background-image: url('https://source.unsplash.com/wnbBH_CGOYQ')"></div>
+        <div class="slidershow--image" style="background-image: url('https://source.unsplash.com/OkTfw7fXLPk')"></div>
+    </div>
+
+    <!-- partial -->
+    <script src="./public/css/login_register.js"></script>
+    <script src="./public/css/login.js"></script>
+</body>
+
+</html>
