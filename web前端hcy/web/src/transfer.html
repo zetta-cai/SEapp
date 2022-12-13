@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>转账</title>
+  <link rel="stylesheet" href="../public/css/transfer.css">
+</head>
+<style>
+  a{
+  color:burlywood;
+  text-decoration:none;
+  }
+  </style>
+  <style>
+  .demo{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height:100%;
+  min-width: 1000px;
+  z-index:-10;
+  zoom: 1;
+  background-color: #fff;
+  background: url(../images/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  background-position: center 0;
+       }
+  </style>
+    <style>
+      #button1 {
+      position: absolute;
+      left:470px;
+      top:80px;
+      border-radius: 30px;
+      border: 1px solid;
+      outline: none;
+      font-size: 20px;
+      writing-mode:initial;
+      }
+      </style>
+      <style>
+      #button2{
+      position: absolute;
+      left:735px;
+      top:80px;
+      border-radius: 30px;
+      border: 1px solid;
+      outline: none;
+      font-size: 20px;
+      }
+      #button4{
+      position: absolute;
+      right:10px;
+      top:10px;
+      font-size: 25px;
+      color: rgb(241, 194, 137);
+      }
+      #button5{
+      position: absolute;
+      left:10px;
+      top:10px;
+      font-size: 25px;
+      color: rgb(241, 194, 137);
+      }
+      </style>
+  <style>
+  #button3{
+  position: absolute;
+  left:620px;
+  top:320px;
+  border-radius: 30px;
+  border: 1px solid;
+  outline: none;
+  font-size: 20px;
+  }
+  </style>
+  <style>
+    #h2-1{
+    position: absolute;
+    left:340px;
+    top:70px;
+    }
+    </style>
+  <style>
+  #h2-2{
+  position: absolute;
+  left:340px;
+  top:150px;
+  }
+  </style>
+  <style>
+  #h2-3{
+  position: absolute;
+  left:340px;
+  top:225px;
+  }
+  </style>
+  <style>
+  #text1{
+  position: absolute;
+  left:470px;
+  top:160px;
+  background-color: rgba(255, 255, 255, 0);
+  width:475px;
+  height:52px;
+  border-radius: 30px;
+  border: 1px solid;
+  outline: none;
+  font-size: 25px;
+  }
+  </style>
+  <style>
+  #text2{
+  position: absolute;
+  left:470px;
+  top:240px;
+  background-color: rgba(255, 255, 255, 0);
+  width:475px;
+  height:52px;
+  border-radius: 30px;
+  border: 1px solid;
+  outline: none;
+  font-size: 25px;
+  }
+  </style>
+  <body>
+  <div class="demo"></div>
+  <button class="btn" id="button4" >首页</button>
+  <button class="btn" id="button5" >返回</button>
+  <form action="http://localhost:3000/login" method="get">
+      <h2 id="h2-1">转账方式：</h2>
+      <button class="btn" id="button1" >行内转账</button>
+      <button class="btn" id="button2" >跨行转账</button>   
+  <div id="body">   
+      <h2 id="h2-2">转入账号:</h2>
+      <input type="text" name="account" id="text1"> 
+      <h2 id="h2-3">转入金额:</h2>
+      <input type="text" name="amount" id="text2">
+      <button class="btn" id="button3" >确认</button>
+  </div>
+  </form>
+</body>
+</html>
+  
