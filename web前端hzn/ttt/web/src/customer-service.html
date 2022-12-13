@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>客服</title>
+  <link rel="style sheet" href="../public/css/customer-service.css">
+  <style>
+    a{color:burlywood}
+  </style>
+  <style>
+    #left{
+      left: 80px;
+      position: absolute;
+      line-height: 80px;
+  }
+  #right{
+      right: 80px;
+      position: absolute;
+      line-height: 80px;
+  }
+  </style>
+    <style>
+      select{
+        border-radius: 10px;
+        display: block;
+        margin: 0 auto; 
+       width: 30%;
+       height:8%;
+       margin-top: 40px;
+       background: rgba(255,255,255,0);
+       color: rgb(10, 0, 0);
+      }
+      </style>
+      <style>
+        #h1{
+          position:absolute;
+          top:100px;
+          left:430px;
+        }
+        #h2{
+          position:absolute;
+          top:160px;
+          left:450px;
+        }
+        #h3{
+          position:absolute;
+          top:230px;
+          left:485px;
+        }
+        #h4{
+          position:absolute;
+          top:300px;
+          left:450px;
+        }
+        #h5{
+          position:absolute;
+          top:370px;
+          left:430px;
+        }
+      </style>
+      <style>
+        #s1{
+              position:absolute;
+              top:120px;
+              left:550px;
+          }
+          #s2{
+              position:absolute;
+              top:190px;
+              left:550px;
+          }
+          #s3{
+              position:absolute;
+              top:260px;
+              left:550px;
+          }
+          #s4{
+              position:absolute;
+              top:330px;
+              left:550px;
+          }
+      </style>
+</head>
+<style>
+  .demo{
+      position:fixed;
+      top: 0;
+      left: 0;
+      width:100%;
+      height:100%;
+      min-width: 1000px;
+      z-index:-10;
+      zoom: 1;
+      background-color: #fff;
+      background: url(../piggy\ banks.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -o-background-size: cover;
+      background-position: center 0;
+  }
+</style>
+<style>
+  a{
+    text-decoration:none
+  }
+  </style>
+<body>
+  <div class="demo"></div>
+<div id="top">
+      <div id="right">
+        <h2><a href="home.html">首页</a></h2>
+        </div>
+        <div id="left">
+        <h2><a href="home.html">返回</a></h2>
+        </div>
+    </div>
+    </div>
+</div>
+<div id="body">
+  <form action="http://localhost:3000/login" method="get">
+    <h2 id ="h1">您可以选择：</h2> 
+    <h3 id ="h2">个人网银</h3> 
+    <select  id ="s1" onchange="window.location=this.value;" style="font-size:25px;">
+      <option value ="question1.html">个人网银登录密码设置规则</option>
+      <option value ="question2.html">个人网银登录密码重置</option>
+      <option value ="question3.html">个人网银用户名找回</option>
+      <option value ="question4.html">个人网银转账记录查询</option>
+       </select>
+       <h3 id ="h3">我的</h3> 
+    <select  id ="s2" onchange="window.location=this.value;" style="font-size:25px;">
+      <option value ="question5.html">电子银行更新个人信息</option>
+      <option value ="question6.html">登录密码设置规则</option>
+      <option value ="question7.html">登录提示“手机号不正确”如何处理</option>
+      <option value ="question8.html">登录手机号码修改</option>
+       </select> 
+       <h3 id ="h4">手机银行</h3> 
+    <select  id ="s3" onchange="window.location=this.value;" style="font-size:25px;">
+         <option value ="question9.html">话费充值不到账原因</option>
+         <option value ="question4.html">转账交易记录查询</option>
+         <option value ="question7.html">登录提示“手机号不正确”如何处理</option>
+         <option value ="question8.html">登录手机号码修改</option>
+          </select> 
+          <h3 id ="h5">第三方服务</h3> 
+       <select  id ="s4" onchange="window.location=this.value;" style="font-size:25px;">
+        <option value ="question10.html">校园卡充值记录</option>
+        <option value ="question9.html">话费充值不到账原因</option>
+        <option value ="question11.html">查询话费充值历史记录操作步骤</option>
+         </select> 
+        </form>
+</div>
+</body>
+</html>

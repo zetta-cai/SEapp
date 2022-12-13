@@ -1,0 +1,54 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#top{
+    height: 80px;
+    margin-top: -30px;
+    background: whitesmoke;
+    line-height: 80px;
+}
+#top>p{
+    margin-left: 90px;
+    font-size: 2em;
+}
+#top>p>a{
+    text-decoration: none;
+}
+#body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+table{
+    width: 450px;
+    height: 300px;
+    /*border: 1px black solid;*/
+    text-align: center;
+    background: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input[name="username"]{
+    width: 250px;
+    height: 30px;
+}
+input[name="password"]{
+    width: 250px;
+    height: 30px;
+}
+input[type="submit"]{
+    margin-top: 10px;
+    width: 90px;
+    height: 30px;
+}
+input[type="button"]{
+    margin-top: 5px;
+    width: 90px;
+    height: 30px;
+}
+

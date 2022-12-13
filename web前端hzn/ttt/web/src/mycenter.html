@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>个人中心</title>
+  <link rel="style sheet" href="../public/css/mycenter.css">
+  <style>
+    a{color:burlywood}
+  </style>
+</head>
+<style>
+  #left{
+    left: 80px;
+    position: absolute;
+    line-height: 80px;
+}
+#right{
+    right: 80px;
+    position: absolute;
+    line-height: 80px;
+}
+</style>
+<style>
+  .demo{
+      position:fixed;
+      top: 0;
+      left: 0;
+      width:100%;
+      height:100%;
+      min-width: 1000px;
+      z-index:-10;
+      zoom: 1;
+      background-color: #fff;
+      background: url(../piggy\ banks.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -o-background-size: cover;
+      background-position: center 0;
+  }
+</style>
+<style>
+  a{
+    text-decoration:none
+  }
+  </style>
+    <style>
+      select{
+        border-radius: 10px;
+        display: block;
+        margin: 0 auto; 
+       width: 30%;
+       height:8%;
+       margin-top: 40px;
+       background: rgba(255,255,255,0);
+       color: rgb(10, 0, 0);
+      }
+      </style>
+  <style>
+        #h{
+          position:absolute;
+          top:120px;
+          left:430px;
+        }
+  </style>
+  <style>
+        #s{
+              position:absolute;
+              top:85px;
+              left:550px;
+          }
+  </style>
+<body>
+  <div class="demo"></div>
+  <div id="top">
+    <div id="right">
+      <h2><a href="home.html">首页</a></h2>
+      </div>
+      <div id="left">
+      <h2><a href="home.html">返回</a></h2>
+      </div>
+  </div>
+  </div>
+<div id="body">
+  <form action="http://localhost:3000/login" method="get">
+    <h3 id ="h">您可以选择：</h3> 
+    <select  id ="s" onchange="window.location=this.value;" style="font-size:25px;">
+   <option value ="mycenter.html">个人中心</option>
+   <option value ="myinformation.html">个人信息页面</option>
+   <option value ="logout.html">注销页面</option>
+    </select>
+  </form>
+</div>
+</body>
+</html>

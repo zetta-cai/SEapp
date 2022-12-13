@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>question3</title>
+  <link rel="style sheet" href="../public/css/question1.css">
+  <style>
+    a{color:burlywood}
+  </style>
+</head>
+<style>
+  #left{
+    left: 80px;
+    position: absolute;
+    line-height: 80px;
+}
+#right{
+    right: 80px;
+    position: absolute;
+    line-height: 80px;
+}
+</style>
+<style>
+  .demo{
+      position:fixed;
+      top: 0;
+      left: 0;
+      width:100%;
+      height:100%;
+      min-width: 1000px;
+      z-index:-10;
+      zoom: 1;
+      background-color: rgba(255, 255, 255, 0);
+      background: url(../piggy\ banks.jpg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -o-background-size: cover;
+      background-position: center 0;
+  }
+</style>
+<style>
+  #demos{
+    font-size:25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    background: rgba(255,255,255,0);
+    color: rgb(12, 1, 1);
+    display: block;
+     margin: 0 auto; 
+     width: 50%;
+     position:absolute;
+     top:250px;
+     left:430px;
+  }
+</style>
+<style>
+  a{
+    text-decoration:none
+  }
+  </style>
+<body>
+  <div class="demo"></div>
+<div id="top">
+  <div id="right">
+    <h2><a href="home.html">首页</a></h2>
+    </div>
+    <div id="left">
+    <h2><a href="customer-service.html">返回</a></h2>
+    </div>
+</div>
+<div id="body">
+  <form action="http://localhost:3000/login" method="get">
+    <textarea  name="demos" id="demos"  cols="100" rows="8" >
+      自助找回过程中，频验证借记卡的取款密码、验证电话查询密码。
+      您可以通过以下两种方式找回个人网银用户名：
+      1、您可拨打中国银行客户服务热线95566选择“网银服务”,在回答座席员相关问题后办理用户名的找回。
+      2、本人携带在网银中关联的任意一张中行银行卡或存折,开立该卡/折的有效身份证件,到境内中国银行任意–家网点办理。
+    </textarea>
+  </form>
+</div>
+</body>
+</html>
